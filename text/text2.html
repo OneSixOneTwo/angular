@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<a>a</a>
+		<a>b</a>
+		<a>c</a>
+		<a>d</a>
+		<a>e</a>
+		<a>f</a>
+	</body>
+	<script>
+		var links = document.getElementsByTagName('a');
+		console.log(links);
+		for(var i =0 ; i < links.length; i++) {
+			links[i].onclick = (function(i){
+				return function(){
+					alert(i)
+				}
+			})(i)
+		}
+	</script>
+
+</html>

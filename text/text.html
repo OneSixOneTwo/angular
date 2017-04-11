@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+	</body>
+	<script>
+		var obj = {
+			name: 'laoxie'
+		};
+		var obj2 = {
+			getName:function(){
+				return this.name;
+			}
+		}
+		console.log(obj2.getName.call(obj))
+		console.log(obj2.getName.apply(obj))
+		console.log(obj2.getName.bind(obj)())
+	</script>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--V view视图层-->
+		<div ng-controller="abc">
+			<p>{{name}}</p>
+			<p class="blue">{{age}}</p>
+			<p name="{{name}}" style="color: {{color}};">test</p>
+			<img src="{{src}}" />
+			<style>
+				.blue{
+					color: {{color}};
+				}
+			</style>
+		</div>
+		<div ng-controller="cbd">
+			<p>{{name}}</p>
+			<p>{{age}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+	//C controller逻辑层
+		//定义一个模块,是一个模块函数,主模块
+		angular.module("demo",[])
+		.controller("abc",function($scope){
+			//$scope//是一个对象
+			$scope.name  = "laoxie";
+			$scope.src = "image/laoxie.jpg";
+			$scope.age = 18;
+			$scope.color = "red"
+		})
+		.controller("cbd",function($scope){
+			$scope//是一个对象
+			$scope.name  = "laolan";
+			$scope.age = 19
+		})
+	</script>
+</html>

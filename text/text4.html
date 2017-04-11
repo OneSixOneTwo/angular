@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+	</body>
+	<script>
+		var arr = [1, [2, 3, [4, 5, [6]]], 7];
+		var newArr = [];
+		function getNewArr(arr) {
+			for(var i = 0; i < arr.length; i++) {
+				if(typeof arr[i] == "number") {
+					newArr.push(arr[i])
+				} else {
+					getNewArr(arr[i])
+				}
+			}
+		}
+		getNewArr(arr)
+	</script>
+
+</html>

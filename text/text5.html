@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<p id="str"></p>
+	</body>
+	<script>
+		var str = "6.1号，这是愉快的儿童节，我清晰地记得，愚蠢的老谢牵着高冷老蓝出现在北京千锋大楼的阳台上...老谢很紧张";
+		var keyword = ["老谢", "老蓝", "千锋", "6.1"];
+		for(var i = 0; i < keyword.length; i++) {
+			str = str.split(keyword[i]);
+			str = str.join("<span style='color:red'>"+keyword[i]+"</span>")
+			console.log(str)
+		}
+		document.getElementById('str').innerHTML = str;
+	</script>
+
+</html>

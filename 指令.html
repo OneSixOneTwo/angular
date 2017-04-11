@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		.fsize {
+			font-size: 26px;
+			color: #0000FF;
+		}
+		
+		.bgcolor {
+			background-color: yellow;
+		}
+	</style>
+	<body>
+		<div ng-controller="indexCtrl">
+			<!--view-->
+			<!--$().text()-->
+			<p style="color: red;">ng-bind</p>
+			<p ng-bind="name"></p>
+			<p style="color: red;">ng-model</p>
+			<p style="color: blue;">1)input</p>
+			<!--$().val()-->
+			<input type="text" ng-model="text" />
+			<button ng-click="getText()">GetText</button>
+			<input type="text" ng-model="name" />
+			<p>{{name}}</p>
+			<p style="color: blue;">2)textarea</p>
+			<textarea ng-model="name"></textarea>
+			<p style="color: blue;">3)select</p>
+			<select ng-model="num">
+				<option value="red">1</option>
+				<option value="blue">2</option>
+				<option value="yellow">3</option>
+			</select>
+			<input type="range" ng-model="size" />
+			<p style="color:{{num}};font-size:{{size+'px'}}">{{num}}</p>
+			<p style="color: red;">ng-repeat</p>
+			<!--ng-repeat ul select table-->
+			<ul>
+				<!--for in-->
+				<!--数组放在in的右边，然后设置一个单词在左边-->
+				<li ng-repeat="c in arr">{{c}}</li>
+			</ul>
+			<select>
+				<option ng-repeat="c in arr" value="{{c}}">{{c}}</option>
+			</select>
+			<table>
+				<tr>
+					<th>name</th>
+					<th>age</th>
+				</tr>
+				<tr ng-repeat="ar in arrs">
+					<th>{{ar.name}}</th>
+					<th>{{ar.age}}</th>
+				</tr>
+			</table>
+			<p ng-repeat="ar in arrs">你的名字是:{{ar.name}} 你的年龄是:{{ar.age}}</p>
+			<p style="color: red;">ng-init</p>
+			<p ng-init="init='abccba'">{{init}}</p>
+			<p style="color: red;">ng-show</p>
+			<p ng-show="!bool">Hello World</p>
+			<!--ng-show的本质就是改变display属性值-->
+			<p style="display: {{!bool?'block':'none'}};">Hello World</p>
+			<button ng-click="changeState()">Ok</button>
+			<p style="color: red;">ng-hide</p>
+			<p ng-hide="!bool">Hello World</p>
+			<p style="color: red;">ng-if</p>
+			<p ng-if="!bool">Hello World</p>
+
+			<p style="color: red;">ng-class</p>
+			<p ng-class="{'fsize':bool,'bgcolor':bool}">ng-class的测试</p>
+			<p class="{{bool?'fsize':''}}">ng-class的测试</p>
+
+			<p style="color: red;">ng-style</p>
+			<!--css() font-size-->
+			<input ng-model="size" type="range" />
+			<p ng-style="{color:'red',fontSize:size+'px'}">ng-style测试</p>
+			<p style="font-size:{{size}}px">ng-style测试</p>
+
+			<p style="color: red;">ng-src</p>
+			<!--ng-src="{{}}"-->
+			<!--%7B%7Bsrc%7D%7D==={{src}}-->
+			<!---->
+			<img ng-src="{{src}}" />
+			<!--src = image/laoxie.jpg" /><img src="image/laoxie.jpg-->
+			<!--ng-bind vs {{}}-->
+
+			<p style="color: red;">ng-href</p>
+			<!--<link />
+			<a></a>-->
+			<a ng-href="{{src}}">点击图片</a>
+
+			<p style="color: red;">ng-switch</p>
+			<select ng-model="page">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+			<button ng-click="page='1'">Ok</button>
+			<div ng-switch="page">
+				<p ng-switch-when="1">第一页</p>
+				<p ng-switch-when="2">第二页</p>
+				<p ng-switch-when="3">第三页</p>
+			</div>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope) {
+			//model
+			//ng-model="name"=>$scope.name=>{{name}}//v->m->v
+			//$scope.name=>ng-model=>{{name}}//m->v
+			$scope.page = "2";
+			$scope.src = "image/laoxie.jpg";
+			$scope.bool = true;
+			$scope.name = "laoxie";
+			$scope.num = "red";
+			$scope.text = "";
+			$scope.size = 16;
+			$scope.getText = function() {
+				console.log($scope.text)
+			};
+			$scope.arr = ['a', 'b', 'c', 'd'];
+			$scope.arrs = [{
+				name: 'Lemon',
+				age: 8
+			}, {
+				name: 'Eno',
+				age: 10
+			}, {
+				name: 'Master Yi',
+				age: 9
+			}];
+			$scope.changeState = function() {
+				$scope.bool = !$scope.bool
+			}
+		})
+	</script>
+</html>
