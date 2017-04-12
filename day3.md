@@ -5,12 +5,14 @@ app.direcitve("指令的名字",自定义指令的函数(逻辑))
 Angular叫指令，事实上就是组件
 ### restrict
 ECMA:
+
 |值|value|
 |-|-|
 |element|元素，标签|
 |attribute|属性|
 |class|类|
 |m|注释|
+
 
 如果不写就是默认所有形式都可以呈现,可以支持"EA"和"EAMC"
 
