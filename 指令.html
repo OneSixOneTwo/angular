@@ -98,12 +98,14 @@
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
+				<option value="4">4</option>
 			</select>
-			<button ng-click="page='1'">Ok</button>
+			<button ng-click="page='4'">Ok</button>
 			<div ng-switch="page">
 				<p ng-switch-when="1">第一页</p>
 				<p ng-switch-when="2">第二页</p>
 				<p ng-switch-when="3">第三页</p>
+				<p ng-switch-default>第四页</p>
 			</div>
 		</div>
 	</body>

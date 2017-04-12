@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<input ng-model="name" />
+			<p>{{name}}</p>
+			<xheader data="1"></xheader>
+			<xheader data="2"></xheader>
+			<!--ng-show ng-hide-->
+			<div ng-color="blue">测试文字</div>
+			<div ng-clickk="clickk()">Ok</div>
+		</div>
+		<div ng-controller="index2Ctrl">
+			<div ng-color="red">测试文字</div>
+			<div ng-clickk="abc()">Ok</div>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope) {
+			$scope.name = "yao";
+			$scope.clickk = function() {
+				console.log("clickk")
+			}
+		});
+		app.controller("index2Ctrl", function($scope) {
+			$scope.abc = function() {
+				console.log("abc")
+			}
+		});
+		app.controller("directiveCtrl", function($scope) {
+			$scope.cbd = function() {
+				console.log("cbd")
+			}
+		});
+		app.directive("xheader", function() {
+			return {
+				templateUrl: 'directive/xheader.html',
+				scope: {}, //true false {}
+				//true:除了第一次绑定的时候，父能影响子，子不能影响父
+				//false:父子之间相互影响
+				//{}:父子互不影响，就是独立作用域
+				controller: "directiveCtrl",
+				link: function(scope, ele, attr) {
+					scope.name = "xie"
+					scope.num = attr.data;
+				}
+			}
+		})
+		app.directive("ngColor", function() {
+			return {
+				link: function(scope, ele, attr) {
+					//console.log(attr)
+					ele.css('color', attr.ngColor)
+				}
+			}
+		})
+		app.directive("ngClickk", function() {
+			return {
+				link: function(scope, ele, attr) {
+					ele.bind("click", function() {
+						//console.log(attr)
+						//clickk()
+						//attr.ngClickk
+						scope.$apply(attr.ngClickk)
+					})
+				}
+			}
+		})
+	</script>
+
+</html>

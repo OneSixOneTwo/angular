@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+			<p>123</p>
+			<input ng-model="name" />
+			<xie data="1" abcdef="abc" main-a="cbd"></xie>
+			<xie data="2"></xie>
+			<!--
+				ele:yaoyiyao attr:data=1
+			-->
+		</div>
+	</body>
+	<script src="js/jquery.js"></script>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope) {
+			//model
+			//$scope.name = "xie";
+		})
+		app.directive("xie", function() {
+			return {
+				templateUrl: 'directive/xheader.html',
+				replace:false,
+				//scope:{},//隔离作用域
+				link:function(scope,ele,attr){
+					//scope作用域
+					//ele(element)标签的节点
+					//link 无非就是组件的控制器 存放该组件数据模型
+					//model
+					scope.name = "lan";
+					scope.text = "第一个组件，";
+					scope.Click = function(){
+						console.log("click")
+					}
+					console.log(ele)
+					/*ele.bind('click',function(){
+						console.log("yaoyiyao")
+					})*/
+					$(ele).find("p").css('color','red');
+					console.log(attr)
+					scope.num = attr.data
+				}
+			}
+		})
+		app.directive("makeRed",function(){
+			return {
+				link:function(scope,ele,attr){
+					ele.css('color','red')
+				}
+			}
+		})
+	</script>
+
+</html>

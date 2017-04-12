@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="css/bootstrap.css" />
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<xtable></xtable>
+			<p>{{cba}}</p>
+			<!--组件-->
+			<!--以属性值呈现 ng-XXX-->
+			<!--<div yao-abc></div>-->
+			<!--以标签的呈现<ng-xie></ng-xie>-->
+			<!--<ng-xie></ng-xie>-->
+			<!--<header></header>-->
+			<!--<div class="ng-xie"></div>-->
+			<!--directive:ng-xie asdasdasd-->
+		</div>
+		<div ng-controller="index2Ctrl">
+			<xtable abc="A" hello="name"></xtable>
+			<input ng-model="name" />
+			<!--组件-->
+			<!--以属性值呈现 ng-XXX-->
+			<!--<div yao-abc></div>-->
+			<!--以标签的呈现<ng-xie></ng-xie>-->
+			<!--<ng-xie></ng-xie>-->
+			<!--<header></header>-->
+			<!--<div class="ng-xie"></div>-->
+			<!--directive:ng-xie asdasdasd-->
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module('demo', []);
+		console.log(app);
+		app.controller('indexCtrl', function($scope) {
+			//model数据模型 组件也能共享
+			$scope.text = '第一个组件的文字';
+			$scope.name = 'xie';
+			$scope.Click = function() {
+				console.log("a")
+			}
+		})
+		app.controller('dirCtrl', function($scope) {
+			console.log("controller");
+			$scope.name = "abc"
+			$scope.cba = "cba";
+			/*console.log($scope)
+			console.log($element)
+			console.log($attrs)*/
+			$scope.abc = function() {
+				console.log("abcd")
+			}
+		})
+		app.controller('index2Ctrl', function($scope) {
+				$scope.text = '第二个组件的文字';
+				$scope.name = 'xie';
+				$scope.Click = function() {
+					console.log("b")
+				}
+			})
+			//angular叫指令，事实上就是组件
+		app.directive('xtable', function($http) {
+			return {
+				restrict: 'ECMA', //ECMA
+				//element :元素，标签
+				//attribute :属性
+				//class: 类
+				//m :注释
+				//template:
+				replace: false, //bool
+				scope: {
+					hello: "=hello"
+				},
+				templateUrl: 'directive/xtable.html',
+				controller: "dirCtrl",
+				link: function(scope, ele, attr) {
+					$http({
+						method: "post",
+						url: "js/test.json",
+						params: {
+							'username': 'tan'
+						}
+					}).then(function(data) {
+						scope.text = data.data.name
+					}, function(data) {
+
+					})
+					scope.text = "你好"
+					console.log(attr)
+				}
+			}
+		})
+	</script>
+
+</html>
