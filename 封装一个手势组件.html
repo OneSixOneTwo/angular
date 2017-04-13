@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name="viewport">
+		<title></title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<p ng-touch="">{{name}}</p>
+			<p ng-touch=""></p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope) {
+			$scope.name = 'lbt';	
+		})
+		app.directive("ngTouch", function() {
+			return {
+				link: function(scope, ele, attr) {
+					var xStart, xEnd, yStart, yEnd;
+					ele.bind("touchstart", function(e) {
+						//console.log("start");
+						//console.log("X:"+e.changedTouches[0].pageX)
+						xStart = e.changedTouches[0].pageX
+							//console.log("Y:"+e.changedTouches[0].pageY)
+						yStart = e.changedTouches[0].pageY;
+					})
+					ele.bind("touchend", function(e) {
+						//console.log("end"+e)
+						//console.log(e)
+						//console.log("X:"+e.changedTouches[0].pageX)
+						//console.log("Y:"+e.changedTouches[0].pageY)
+						xEnd = e.changedTouches[0].pageX;
+						yEnd = e.changedTouches[0].pageY;
+						if(Math.abs(xStart - xEnd) >= Math.abs(xStart - yEnd)) {
+							//不是左就是右
+							if(xStart > xEnd) {
+								console.log("left")
+							} else {
+								console.log("right")
+							}
+						} else {
+							//不是上就是下
+							if(yStart > yEnd) {
+								console.log("top")
+							} else {
+								console.log("bottom")
+							}
+						}
+					})
+				}
+			}
+		})
+	</script>
+
+</html>

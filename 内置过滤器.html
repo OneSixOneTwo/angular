@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<!--<p>{{name}}</p>-->
+			<p style="color: red;">currency</p>
+			<p>{{num|currency:"￥"}}</p>
+
+			<p style="color: red;">uppercase</p>
+			<p>{{str|uppercase}}</p>
+
+			<p style="color: red;">lowercase</p>
+			<p>{{str|lowercase}}</p>
+
+			<p style="color: red;">filter</p>
+			<input ng-model="search" />
+			<ul>
+				<li ng-repeat="p in people|filter:{skill:search}">name: {{p.name}} age: {{p.age}}</li>
+			</ul>
+
+			<p style="color: red;">orderBy</p>
+			<input ng-model="search" />
+			<!--true是降序 false是升序-->
+			<button ng-click="sort=!sort">排序</button>
+			<ul>
+				<li ng-repeat="p in people|filter:{skill:search}|orderBy:'age':sort">name: {{p.name}} age: {{p.age}} skill: {{p.skill}}</li>
+			</ul>
+			
+			<p style="color: red;">date</p>
+			<p>{{time|date:"yyyy/MM/dd-hh-mm:ss EEEE"}}</p>
+			
+			<p style="color: red;">json</p>
+			<p>{{obj|json}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope) {
+			$scope.name = 'filter';
+			$scope.num = 12345678;
+			$scope.str = "AbCdEf";
+			$scope.search = '';
+			$scope.sort = true;
+			$scope.time = 1492051488000;
+			$scope.obj = {
+				name:'jskdjals',
+				age:20
+			};
+			$scope.people = [{
+				name: 'Yi',
+				age: 18,
+				skill: 'JS'
+			}, {
+				name: 'Lemon',
+				age: 18,
+				skill: 'PS'
+			}, {
+				name: 'Eno',
+				age: 81,
+				skill: 'CSS'
+			}, {
+				name: 'Xie',
+				age: 66,
+				skill: 'HTML'
+			}, {
+				name: 'Lan',
+				age: 233,
+				skill: 'HTML'
+			}]
+		})
+	</script>
+
+</html>

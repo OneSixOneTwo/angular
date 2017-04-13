@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="css/swiper.css" />
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+			<xswiper></xswiper>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script src="js/swiper.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope) {
+			$scope.name = 'lbt'
+		})
+		app.directive("xswiper", function() {
+			return {
+				//view html css
+				templateUrl: 'directive/xswiper.html',
+				//controller js
+				//scope:{},
+				link: function(scope, ele, attr) {
+					var swiper = new Swiper('.swiper-container', {
+						pagination: '.swiper-pagination',
+						paginationClickable: true
+					});
+				}
+			}
+		})
+	</script>
+</html>
