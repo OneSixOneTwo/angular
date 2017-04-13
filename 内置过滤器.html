@@ -11,6 +11,7 @@
 			<!--<p>{{name}}</p>-->
 			<p style="color: red;">currency</p>
 			<p>{{num|currency:"￥"}}</p>
+			<p ng-bind="num|currency:'￥'"></p>
 
 			<p style="color: red;">uppercase</p>
 			<p>{{str|uppercase}}</p>
@@ -31,12 +32,23 @@
 			<ul>
 				<li ng-repeat="p in people|filter:{skill:search}|orderBy:'age':sort">name: {{p.name}} age: {{p.age}} skill: {{p.skill}}</li>
 			</ul>
-			
+
 			<p style="color: red;">date</p>
 			<p>{{time|date:"yyyy/MM/dd-hh-mm:ss EEEE"}}</p>
-			
+
 			<p style="color: red;">json</p>
 			<p>{{obj|json}}</p>
+
+			<p style="color: red">limitTo</p>
+			<!--第一个参数是切割的长度 第二个参数是切割的位置-->
+			<p>{{str|limitTo:2:2}}</p>
+			<ul>
+				<li ng-repeat="p in people|limitTo:3:1">name: {{p.name}} age: {{p.age}}</li>
+			</ul>
+			
+			<p style="color: red">number</p>
+			<!--显示小数点，精确度-->
+			<p>{{num|number:5}}</p>
 		</div>
 	</body>
 	<script src="js/angular.js"></script>
@@ -50,8 +62,8 @@
 			$scope.sort = true;
 			$scope.time = 1492051488000;
 			$scope.obj = {
-				name:'jskdjals',
-				age:20
+				name: 'jskdjals',
+				age: 20
 			};
 			$scope.people = [{
 				name: 'Yi',

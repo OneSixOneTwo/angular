@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{text|ed}}</p>
+			<p>{{str|ed}}</p>
+			<!--<p>{{html}}</p>-->
+			<div ng-bind-html="html|html"></div>
+			<p>{{num}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module('demo', []);
+		console.log(app);
+		app.controller('indexCtrl', function($scope,$http,$filter) {
+			//+ed
+			//model
+			$scope.text = 'move';
+			$scope.str = "abc";
+			$http({
+				url:"http://10.3.132.67:81/news/php/index.php/news_api/show_list",
+			}).then(function(data){
+				console.log(data);
+				$scope.html = data.data.news_list[0].text;
+			})
+			//{{123456789|currency:"￥"}}
+			$scope.num = $filter("currency")(123456789,"￥")
+		})
+		//app.directive
+		app.filter("ed",function(){
+			return function(value){
+				//text=>value
+				return value+"ed";
+			}
+		})
+		app.filter("html",function($sce){
+			return function(value){
+				return $sce.trustAsHtml(value);
+			}
+		})
+	</script>
+</html>

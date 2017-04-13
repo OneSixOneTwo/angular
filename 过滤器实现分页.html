@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+			<button ng-click="next()">下一页</button>
+			<button ng-click="pageTo(1)">第一页</button>
+			<button ng-click="pageTo(2)">第二页</button>
+			<button ng-click="pageTo(3)">第三页</button>
+			<button ng-click="pre()">上一页</button>
+			<ul>
+				<!--第一个值就是一页显示多少条    第二个值就是第几页-->
+				<li ng-repeat="p in people|limitTo:2:page">{{p.name}}</li>
+			</ul>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		app.controller("indexCtrl", function($scope) {
+			//默认从0开始
+			$scope.page = 0;
+			$scope.next = function() {
+				if($scope.page + 2 < $scope.people.length) {
+					$scope.page += 2;
+				} else {
+					$scope.page;
+				}
+			}
+			$scope.pre = function() {
+				if($scope.page == 0) {
+					$scope.page = 0;
+				} else {
+					$scope.page -= 2;
+				}
+			}
+			$scope.pageTo = function(num) {
+				//1 = 0 2 = 2 3 = 4 4 = 6
+				$scope.page = (num - 1) * 2;
+			}
+			$scope.name = "yao";
+			$scope.people = [{
+				name: 'Yi',
+				age: 18,
+				skill: 'JS'
+			}, {
+				name: 'Lemon',
+				age: 18,
+				skill: 'PS'
+			}, {
+				name: 'Eno',
+				age: 81,
+				skill: 'CSS'
+			}, {
+				name: 'Xie',
+				age: 66,
+				skill: 'HTML'
+			}, {
+				name: 'Lan',
+				age: 233,
+				skill: 'HTML'
+			}]
+		})
+	</script>
+
+</html>
