@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		console.log(app)
+		app.controller("indexCtrl", function($scope,author,six) {
+			$scope.name = "value";
+			console.log(author)
+			console.log(six)
+		})
+		app.value("author","laoxie");
+		app.value("six",6)
+	</script>
+</html>

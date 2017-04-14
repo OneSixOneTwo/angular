@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-controller="index2Ctrl">
+		<p>{{name}}</p>
+		<p>{{skill}}</p>
+		<!--<a href="">a</a>-->
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		app.controller("index2Ctrl",function($scope,$location){
+			$scope.name = "b";
+			console.log($location.search())
+			$scope.skill = $location.search().skill
+		})
+	</script>
+</html>

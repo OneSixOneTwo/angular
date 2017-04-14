@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		console.log(app)
+		app.controller("indexCtrl", function($scope, tool, tool2, cookie) {
+			$scope.name = "abc";
+			console.log(tool)
+			console.log(tool.sum(5, 8))
+			console.log(tool2)
+			console.log(tool2.sum(90, 1))
+			console.log(tool2.multi(90, 1))
+			console.log(tool2.http)
+			tool2.http({
+				url: "get.php",
+				method: "GET",
+				params: {
+					skill: "PS"
+				}
+			}).then(function(data) {
+				console.log(data)
+			})
+			cookie.setCookie("name","wscat")
+			console.log(cookie.getCookie("name"))
+		})
+		app.service("tool", function() {
+			return {
+				sum: function(a, b) {
+					return a + b
+				}
+			}
+		})
+		app.service("tool2", function(tool, $http) {
+			return {
+				sum: tool.sum,
+				multi: function(a, b) {
+					return a * b
+				},
+				http: $http
+			}
+		})
+		app.service("cookie", function($document) {
+			return {
+				setCookie: function(name, value) {
+					var days = 10;
+					var ex = new Date();
+					ex.setTime(ex.getTime() + days * 24 * 60 * 60 * 1000);
+					$document[0].cookie = name + "=" + value + ";expires=" + ex;
+				},
+				getCookie: function(name) {
+					var a;
+					var reg = new RegExp("(^|)" + name + "=([^;]*)(;|$)");
+					if(a = $document[0].cookie.match(reg)) {
+						return a[2];
+					}
+				},
+			}
+		})
+	</script>
+
+</html>

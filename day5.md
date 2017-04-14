@@ -60,3 +60,49 @@ $location.search().name;
 // or  
 $location.search()['name']; 
 ``` 
+
+## $rootScope
+是ng-app的作用域范围，它可以用在两个控制器之间传递数据，你可以把它看做ng的全局作用域
+
+# 自定义服务
+## service
+**可以是一个构造函数，也可以返回一个对象**
+服务一般就是自定义一个封装好的对象方法，然后就可以注入到`controller,directive,filter,service`
+```javascript
+		app.service("服务名字",function(){
+			//返回的是一个对象
+			return {
+				
+			}
+		})
+```
+一般工作用service就够了，因为它既可以是构造函数，也可以是返回对象
+
+## factory
+**返回的是一个对象**
+```javascript
+app.factory("服务名字", function() {
+			return {
+				name: "lan",
+				age: 81
+			}
+		})
+```
+
+## 事件广播
+$broadcast:向下(子)广播事件
+```javascript
+	$scope.$broadcast('事件名字', '传递的值');
+```
+
+$emit:向上(父)广播事件
+```javascript
+	$scope.$emit('事件名字', '传递的值');
+```
+
+$on:接受广播事件
+```javascript
+			$scope.$on('事件名字', function(event, data) {
+				//data 就是传递过来的值
+			})
+```

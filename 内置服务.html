@@ -7,7 +7,7 @@
 	</head>
 
 	<body>
-		<div ng-controller="indexCtrl">
+		<div ng-controller="indexCtrl" style="border: 1px solid blue;>
 			<p style="color: red;">$http</p>
 			<input ng-model="input" />
 			<input ng-model="skill" />
@@ -30,6 +30,21 @@
 			<p id="name">{{name}}</p>
 			<p style="color: red;">$sce</p>
 			<div ng-bind-html="html"></div>
+			<p style="color: red;">在过滤器里面使用服务</p>
+			<div ng-bind-html="'<p>123</p>'|html"></div>
+			<p style="color: red;">在组件里面使用服务</p>
+			<xie></xie>
+			<p>{{age}}</p>
+			<p>{{name}}</p>
+			<p style="color: red;">$rootScope</p>
+			<p>indexCtrl:{{exchange}}</p>
+		</div>
+		
+		<p>ng-app:{{exchange}}</p>
+		
+		<div ng-controller="index2Ctrl" style="border: 1px solid blue;">
+			<p>{{name}}</p>
+			<p>index2Ctrl:{{exchange}}</p>
 		</div>
 	</body>
 	<!--<script src="js/angular.js"></script>-->
@@ -37,7 +52,11 @@
 	<script src="js/ngPost.js"></script>
 	<script>
 		var app = angular.module("demo", ['MyModule']);
-		app.controller("indexCtrl", function($scope, $http, $timeout,$interval,$location,$document,$window,$sce) {
+		app.controller("index2Ctrl",function($scope,$rootScope){
+			//$scope.name = "tacsw";
+		})
+		app.controller("indexCtrl", function($scope, $http, $timeout,$interval,$location,$document,$window,$sce,$rootScope) {
+				$rootScope.name = "exchange"
 				$scope.name = "wscat"
 				$scope.submitJsonp = function() {
 					$http({
@@ -108,6 +127,29 @@
 				//$window.location.href = ""
 				
 				$scope.html = $sce.trustAsHtml("<p>123<sapn>456</span></p>");
+		})
+		app.filter("html",function($sce){
+			return function(input){
+				return $sce.trustAsHtml(input)
+			}
+		})
+		app.directive("xie",function($http){
+			return {
+				scope:{},
+				template:'<p>{{age}}</p>',
+				link:function(scope,ele,attr){
+					$http({
+						url:"get.php",
+						method:"GET",
+						params:{
+							skill:"PS"
+						}
+					}).then(function(data){
+						console.log(data)
+						scope.age = data.data
+					})
+				}
+			}
 		})
 			//app.fitler("",function(){})
 			//app.directive("",function(){})

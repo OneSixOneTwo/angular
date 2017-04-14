@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-controller="indexCtrl">
+		<p>{{name}}</p>
+		<a ng-href="{{'事件广播通信数据2.html#!?name=2&skill='+skill}}">跳转到b页面</a>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		app.controller("indexCtrl",function($scope){
+			$scope.name = "a";
+			$scope.skill = "abc"
+		})
+	</script>
+</html>

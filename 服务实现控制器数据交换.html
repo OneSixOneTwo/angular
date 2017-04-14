@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p>{{name}}</p>
+		<div ng-controller="indexCtrl"  style="border: 1px solid blue;">
+			<p>{{name}}</p>
+			<p>{{age}}</p>
+			<p>{{skill}}</p>
+		</div>
+		
+		<div ng-controller="index2Ctrl" style="border: 1px solid blue;">
+			<p>{{name}}</p>
+			<p>{{skill}}</p>
+			<p>{{age}}</p>
+			<p>{{skill}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo",[]);
+		app.controller("indexCtrl",function($scope,$rootScope,exchange){
+			$scope.name = "yao";
+			$rootScope.exchange = "ps"
+			$rootScope.name = "lan"
+			exchange.age = 48
+			$scope.age = exchange.age
+			$scope.skill = exchange.skill
+		})
+		app.controller("index2Ctrl",function($scope,$rootScope,exchange){
+			//$scope.name = "xie"
+			exchange.skill = 'ps'
+			$scope.skill = $rootScope.exchange;
+			$scope.age = exchange.age
+			$scope.skill = exchange.skill
+		})
+		app.service("exchange",function(){
+			return {}
+		})
+	</script>
+</html>

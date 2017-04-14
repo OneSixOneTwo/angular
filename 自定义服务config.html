@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		console.log(app)
+		app.controller("indexCtrl", function($scope, tool1, tool2,tool3) {
+			$scope.name = "provider";
+			console.log(tool1)
+			console.log(tool2)
+			console.log(tool3)
+		})
+		app.config(function($provide) {
+			$provide.service("tool1", function() {
+				this.name = 'xie';
+				this.age = 18;
+			});
+			$provide.factory("tool2", function() {
+				return {
+					name: 'lan',
+					age: 18
+				}
+			})
+			$provide.value("tool3", {
+					name: 'yi',
+					age: 19
+			})
+		});
+	</script>
+
+</html>

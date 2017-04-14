@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		console.log(app)
+		app.controller("indexCtrl", function($scope,tool) {
+			$scope.name = "provider";
+			console.log(tool)
+		})
+		app.provider("tool",function(){
+			return {
+				$get:function(){
+					return {
+						name:'wscat'
+					}
+				}
+			}
+		});
+	</script>
+</html>

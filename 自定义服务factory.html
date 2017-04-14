@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+		</div>
+	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		console.log(app)
+		app.controller("indexCtrl", function($scope,fac,tool) {
+			$scope.name = "fac";
+			console.log(fac)
+			console.log(tool)
+		})
+		app.factory("fac", function() {
+			return {
+				name: "lan",
+				age: 81
+			}
+		})
+		//它是构造器，也可以返回对象，如果是一个构造函数的时候，当我们注入这个服务，ng对它自动实例化
+		app.service("tool",function(){
+			this.name = "xie";
+			this.age = 81
+		})
+	</script>
+</html>
