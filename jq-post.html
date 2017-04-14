@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script src="js/jquery.js"></script>
+	<script>
+		$.ajax({
+			type:"POST",
+			url:'post.php',
+			data:{
+				input:'a',
+				skill:'b'
+			},
+			success:function(data){
+				console.log(data)
+			}
+		})
+	</script>
+</html>

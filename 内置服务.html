@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<p style="color: red;">$http</p>
+			<input ng-model="input" />
+			<input ng-model="skill" />
+			<button ng-click="submitJsonp()">Jsonp</button>
+			<button ng-click="sumitGet()">Get</button>
+			<button ng-click="sumitPost()">Post</button>
+			<p>{{name}}</p>
+			<p style="color: red;">$timeout</p>
+			<p>{{time}}</p>
+			<p style="color: red;">$interval</p>
+			<p>{{time2}}</p>
+			<p style="color: red;">$location</p>
+			<p>$loaction.search()</p>
+			<p>
+				http://localhost:81/angular/0410/angular/%E5%86%85%E7%BD%AE%E6%9C%8D%E5%8A%A1.html#?name=2&skill=abc => Object {name: "2", skill: "abc"}
+			</p>
+			<p style="color: red;">$document</p>
+			<p id="name">{{name}}</p>
+			<p style="color: red;">$window</p>
+			<p id="name">{{name}}</p>
+			<p style="color: red;">$sce</p>
+			<div ng-bind-html="html"></div>
+		</div>
+	</body>
+	<!--<script src="js/angular.js"></script>-->
+	<script src="js/angular1.5.9.js"></script>
+	<script src="js/ngPost.js"></script>
+	<script>
+		var app = angular.module("demo", ['MyModule']);
+		app.controller("indexCtrl", function($scope, $http, $timeout,$interval,$location,$document,$window,$sce) {
+				$scope.name = "wscat"
+				$scope.submitJsonp = function() {
+					$http({
+						url: 'jsonp.php',
+						method: 'JSONP', //get post jsonp,
+						params: {
+							input: $scope.input,
+							skill: $scope.skill
+						}
+					}).then(function(data) {
+						console.log(data)
+						$scope.name = data.data.name
+					});
+				}
+
+				$scope.sumitGet = function() {
+					$http({
+						url: 'get.php',
+						method: 'GET', //get post jsonp,
+						params: {
+							input: $scope.input,
+							skill: $scope.skill
+						}
+					}).then(function(data) {
+						console.log(data)
+						$scope.name = data.data
+					});
+				}
+				$scope.sumitPost = function() {
+					/*$http({
+						url: 'post.php',
+						method: 'POST', //get post jsonp,
+						params: {
+							input: $scope.input,
+							skill: $scope.skill
+						}
+					}).then(function(data) {
+						console.log(data)
+						$scope.name = data.data
+					});*/
+					$http.post("post.php", {
+						params: {
+							input: $scope.input,
+							skill: $scope.skill
+						}
+					}).success(function(data) {
+						console.log(data)
+					})
+				}
+				$scope.time = 1;
+				$scope.time2 = 1;
+				$timeout(function(){
+					$scope.time = 3;
+				},2000);
+				$interval(function(){
+					$scope.time2++;
+				},1000)
+				/*window.setTimeout(function(){
+					$scope.time = 3;
+				},2000)*/
+				console.log($location.search())
+				console.log($location.search())
+				console.log(document);
+				console.log($document);
+				//$document[0].getElementById("name").style.color = "red";
+				document.getElementById("name").style.color = "red"
+				console.log($window)
+				//$window.location.href = ""
+				
+				$scope.html = $sce.trustAsHtml("<p>123<sapn>456</span></p>");
+		})
+			//app.fitler("",function(){})
+			//app.directive("",function(){})
+	</script>
+</html>

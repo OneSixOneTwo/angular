@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html ng-app="demo">
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -8,7 +7,7 @@
 	<body>
 		<div ng-controller="indexCtrl">
 			<input ng-model="search" />
-			<p ng-bind-html="html|xie:search|html"></p>
+			<p ng-bind-html="html|highlight:search|html"></p>
 		</div>
 	</body>
 	<script src="js/angular.js"></script>
@@ -17,10 +16,8 @@
 		app.controller('indexCtrl', function($scope) {
 			$scope.html = "6.1号，这是愉快的儿童节，我清晰地记得，愚蠢的老谢牵着高冷老蓝出现在北京千锋大楼的阳台上...老谢很紧张";
 		})
-		app.filter("xie", function() {
+		app.filter("highlight", function() {
 			return function(input, value) {
-				console.log(input); //html
-				console.log(value); //老谢
 				var arr = input.split(value);
 				var output = arr.join("<span style='color:red'>" + value + "</span>");
 				return output;

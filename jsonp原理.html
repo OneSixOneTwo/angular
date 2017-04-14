@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<button onclick="jsonp('api.php')">发送请求</button>
+	</body>
+	<script>
+		function callback(data) {
+			console.log(data)
+			return data
+		}
+	</script>
+	<script>
+		function jsonp(url){
+			var script = document.createElement("script");
+			script.src = url;
+			document.body.appendChild(script);
+		}
+	</script>
+	<!--<script src="js/jsonp.js"></script>-->
+
+</html>
