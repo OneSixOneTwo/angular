@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<a href="#!/page1">1</a>
+		<a href="#!/page2">2</a>
+		<a href="#!/page3">3</a>
+		<div ui-view style="border: 1px solid red;"></div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script src="../js/angular-ui-router.js"></script>
+	<script>
+		var app = angular.module('demo',['ui.router']);
+		app.config(function($stateProvider){
+			$stateProvider.state('page',{
+				url:'/page1',
+				templateUrl:'template/page1.html',
+				controller:'indexCtrl'
+			}).state('page.a',{
+				url:'/a',
+				template:'<p>a</p><div ui-view></div>'
+			})
+			.state('page.a.aa',{
+				url:'/aa',
+				template:'<p>aa</p>'
+			})
+			.state('page.a.bb',{
+				url:'/bb',
+				template:'<p>bb</p>'
+			})
+			
+			.state('page.b',{
+				url:'/b',
+				template:'<p>b</p>'
+			})
+			
+			.state('page2',{
+				url:'/page2',
+				template:'<p>第二页</p>'
+			}).state('page3',{
+				url:'/page3',
+				template:'<p>第三页</p>'
+			})
+		})
+		app.controller("indexCtrl",function($scope){
+			$scope.name = "xie"
+		})
+	</script>
+</html>

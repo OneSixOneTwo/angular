@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<a href="#!/index">1</a>
+		<a href="#!/home">2</a>
+		<a href="#!/login">3</a>
+		<!--<div ng-view></div>-->
+		<ng-view></ng-view>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script src="../js/angular-route.js"></script>
+	<script>
+		var app = angular.module('demo', ['ngRoute'])
+		app.config(function($routeProvider) {
+			$routeProvider.when("/index", {
+				templateUrl: 'template/index.html',
+				controller: 'indexCtrl'
+			}).when("/home", {
+				templateUrl: 'template/home.html',
+				controller: 'homeCtrl'
+			}).when("/login", {
+				templateUrl: 'template/home.html',
+				controller: 'loginCtrl'
+			}).otherwise({
+				redirectTo: '/home'
+			});
+		})
+		app.controller('indexCtrl', function($scope) {
+			$scope.name = "xie"
+		})
+		app.controller('homeCtrl', function($scope) {
+			$scope.name = "lan"
+		})
+		app.controller('loginCtrl', function($scope) {
+			$scope.name = "yi"
+		})
+		app.directive('xheader', function() {
+			return {
+				template: "<p>这是一个组件</p>"
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>{{title}}</title>
+	</head>
+
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+		</div>
+		<div ng-controller="index2Ctrl">
+			<p>{{name}}</p>
+		</div>
+	</body>
+	<!-- 10000+ -->
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module("demo", []);
+		console.log(app)
+		app.controller("indexCtrl", function($scope, $rootScope, $http, http,sum) {
+			$scope.name = "abc";
+			$rootScope.title = "angular教程";
+			/*http.ajax({method:"GET", url:"test.php"}).success(function(){
+				
+			});*/
+			
+			//success
+			//123
+			http.name = 1;
+			console.log(sum(1,9))
+		})
+		app.controller("index2Ctrl",function($scope,http){
+			$scope.name = "cba";
+			console.log(http.name)
+		})
+		app.service("sum",function(){
+			return function(a,b){
+				return a+b;
+			}
+		})
+		app.service("http", function() {
+			/*var xmlhttp = new XMLHttpRequest();
+			return {
+				ajax: function(method, url) {
+					
+					xmlhttp.open(method, url, true);
+					xmlhttp.send();
+					
+					return this
+				},
+				success:function(callback){
+					xmlhttp.onreadystatechange = function() {
+						if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+							//返回的值
+							//console.log(xmlhttp.responseText);
+							callback(xmlhttp.responseText)
+						}
+					}
+					console.log("success")
+					return this;
+				}
+			}*/
+		})
+	</script>
+
+</html>
