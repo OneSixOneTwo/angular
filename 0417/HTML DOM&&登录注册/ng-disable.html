@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+			<input ng-model="value" />
+			<input ng-model="value2" />
+			<input ng-model="value3" />
+			<p>{{!value||!value2||!value3}}</p>
+			<button ng-disabled="!value||!value2||!value3">Ok</button>
+		</div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script>
+		var app = angular.module('demo',[]);
+		app.controller('indexCtrl',function($scope){
+			$scope.value = '';
+			$scope.value2 = '';
+			$scope.name = 'ws';
+		})
+	</script>
+</html>

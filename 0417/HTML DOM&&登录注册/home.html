@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="../js/angular1.5.9.js"></script>
+	<script src="../js/ngPost.js"></script>
+	<script src="js/ng-cookie.js"></script>
+	<script>
+		var app = angular.module("demo", ["MyModule", "ngCookies"]);
+		app.controller('homeCtrl', function($scope,$http, $cookieStore, $window) {
+			$scope.islogin = false;
+			$http.post("http://localhost:81/news/php/index.php/login_api/auto_login", {
+				params: {
+					username: $cookieStore.get('username'),
+					token: $cookieStore.get('token')
+				}
+			}).success(function(data) {
+				if(data.code) {
+					$scope.islogin = true;
+				} else {
+					$cookieStore.remove("token");
+					$cookieStore.remove("username");
+					$window.location.href = "login.html"
+				}
+			})
+			$scope.logout = function() {
+				$cookieStore.remove("token");
+				$cookieStore.remove("username");
+				$window.location.href = "login.html"
+			}
+		})
+	</script>
+
+	<body ng-controller="homeCtrl">
+		<div ng-show="islogin">
+			<p>成功登录</p>
+			<button ng-click="logout()" ng-bind="'logout'"></button>
+		</div>
+	</body>
+
+</html>

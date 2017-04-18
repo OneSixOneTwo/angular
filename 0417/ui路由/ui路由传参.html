@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ui-view style="border: 1px solid red;"></div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script src="../js/angular-ui-router.js"></script>
+	<script>
+		var app = angular.module('demo',['ui.router']);
+		app.config(function($stateProvider,$urlRouterProvider){
+			$stateProvider.state('page',{
+				url:'/page1',
+				templateUrl:'template/page1.html',
+				controller:'page1Ctrl'
+			})
+			.state('page2',{
+				url:'/page2/:id/:name',
+				templateUrl:'template/page2.html',
+				controller:'page2Ctrl'
+			})
+			//默认的重定向
+			$urlRouterProvider.when('','/page1')
+		})
+		app.controller("page1Ctrl",function($scope,$window,$rootScope,exchange){
+			$scope.id = '3';
+			$scope.buy = function(){
+				//$window.location.href = "#!/page2?id=" + $scope.id
+				$window.location.href = "#!/page2/" + $scope.id+"/yao"
+			}
+			$rootScope.changeId = 'abc';
+			exchange.changeName = 'cba';
+		})
+		app.controller("page2Ctrl",function($scope,$location,$state,$rootScope,exchange){
+			//console.log($location.search())
+			console.log($state)
+			//$scope.id = $location.search().id
+			$scope.id = $state.params.id
+			$scope.name = $state.params.name
+			console.log($rootScope.changeId);
+			console.log(exchange.changeName)
+		})
+		app.service("exchange",function(){
+			return {}
+		})
+	</script>
+</html>

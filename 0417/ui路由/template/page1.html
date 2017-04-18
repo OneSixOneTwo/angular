@@ -1,7 +1,9 @@
 <div>
-	<p>第一页</p>
-	<p>{{name}}</p>
-	<a href="#!/page1/a">a</a>
-	<a href="#!/page1/b">b</a>
-	<div ui-view style="border: 1px solid blue;"></div>
+	<p>选择商品</p>
+	<select ng-model="id">
+		<option value="1">PC</option>
+		<option value="2">mobile</option>
+		<option value="3">other</option>
+	</select>
+	<button ng-click="buy()">购买</button>
 </div>

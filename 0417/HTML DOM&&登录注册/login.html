@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<input ng-model="username" type="text" />
+			<input ng-model="password" type="password" />
+			<button ng-click="submit()" ng-disabled="!username||!password">登录</button>
+			<button ng-click="register()" ng-disabled="!username||!password">注册</button>
+		</div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script src="js/ng-cookie.js"></script>
+	<script>
+		var app = angular.module('demo', ['ngCookies']);
+		app.controller('indexCtrl', function($scope, $http, $cookieStore,$window) {
+			$scope.username = '';
+			$scope.password = '';
+			$scope.submit = function() {
+				$http({
+					method: 'get',
+					url: 'http://localhost:81/news/php/index.php/login_api/login',
+					params: {
+						username: $scope.username,
+						password: $scope.password
+					}
+				}).then(function(data) {
+					console.log(data)
+					if(data.data.code){
+						$cookieStore.put('token',data.data.info.token);
+						$cookieStore.put('username',data.data.user_name);
+						$window.location.href = "home.html"
+					}else{
+						alert("登录失败")
+					}
+				})
+			}
+			$scope.register = function() {
+				$http({
+					method: 'get',
+					url: 'http://localhost:81/news/php/index.php/login_api/register',
+					params: {
+						username: $scope.username,
+						password: $scope.password
+					}
+				}).then(function(data) {
+					console.log(data)
+					if(data.data.code){
+						$cookieStore.put('token',data.data.info.token);
+						$cookieStore.put('username',data.data.user_name);
+						$window.location.href = "home.html"
+					}else{
+						alert("注册失败")
+					}
+				})
+			}
+		})
+	</script>
+</html>

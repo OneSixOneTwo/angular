@@ -4,7 +4,6 @@
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
-
 	<body>
 		<a href="#!/index">1</a>
 		<a href="#!/home">2</a>
@@ -16,7 +15,7 @@
 	<script src="../js/angular-route.js"></script>
 	<script>
 		var app = angular.module('demo', ['ngRoute'])
-		app.config(function($routeProvider) {
+		app.config(['$routeProvider',function($routeProvider) {
 			$routeProvider.when("/index", {
 				templateUrl: 'template/index.html',
 				controller: 'indexCtrl'
@@ -29,10 +28,10 @@
 			}).otherwise({
 				redirectTo: '/home'
 			});
-		})
-		app.controller('indexCtrl', function($scope) {
+		}])
+		app.controller('indexCtrl', ['$scope',function($scope) {
 			$scope.name = "xie"
-		})
+		}])
 		app.controller('homeCtrl', function($scope) {
 			$scope.name = "lan"
 		})

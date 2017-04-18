@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name|ed}}</p>
+			<p>{{num}}</p>
+			<xheader></xheader>
+		</div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script>
+		angular.module('demo', ['directives', 'services', 'filters', 'controllers']);;
+		(function() {
+			var controllers = angular.module('controllers', []);
+			controllers.controller('indexCtrl', function($scope, sum) {
+				$scope.name = 'wscats';
+				$scope.num = sum(7, 6);
+			})
+		})()
+		;
+		(function() {
+			var directives = angular.module('directives', []);
+			directives.directive('xheader', function() {
+				return {
+					template: '<p>这是一个组件</p>'
+				}
+			})
+		})()
+		;
+		(function() {
+			var services = angular.module('services', [])
+			services.service('sum', function() {
+				return function(a, b) {
+					return a + b
+				}
+			})
+		})()
+		;
+		(function() {
+			var filters = angular.module('filters', [])
+			filters.filter('ed', function() {
+				return function(input) {
+					return input + 'ed'
+				}
+			})
+		})()
+	</script>
+</html>

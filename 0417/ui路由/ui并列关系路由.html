@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<a href="#!/index">index</a>
+		<a href="#!/home">home</a>
+		<div ui-view name="view1"></div>
+		<div ui-view name="view2"></div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script src="../js/angular-ui-router.js"></script>
+	<script>
+		var app = angular.module('demo',['ui.router']);
+		app.config(function($stateProvider){
+			$stateProvider.state('index',{
+				url:'/index',
+				//template:'<p>index</p>'
+				views:{
+					'view1':{
+						template:'<p>index first</p>'
+					},
+					'view2':{
+						template:'<p>index second</p>'
+					}
+				}
+			}).state('home',{
+				url:'/home',
+				//template:'<p>home</p>'
+				views:{
+					'view1':{
+						template:'<p>home first</p>'
+					},
+					'view2':{
+						template:'<p>home second</p>'
+					}
+				}
+			})
+		})
+	</script>
+</html>

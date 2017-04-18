@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<p>{{name}}</p>
+			<form name="myForm">
+				<input type="email" name="user" ng-model="user" required />
+				<br />
+				<!--有输入过内容，不管是否为空都是代表有填写记录-->
+				<span ng-show="myForm.user.$dirty">有填写记录</span>
+				<br />
+				
+				<span ng-show="myForm.user.$pristine">没有填写记录</span>
+				<br />			
+				<!--type类型跟输入的格式一致就为合法-->
+				<span ng-show="myForm.user.$valid">字段内容合法</span>
+				<br />
+				
+				<span ng-show="myForm.user.$invalid">字段内容非法</span>
+				<br />
+				
+				<span ng-show="myForm.user.$error.required">用户名是必须的。</span>
+				<br />
+				<button ng-disabled="!(myForm.user.$dirty && myForm.user.$valid)">提交</button>
+			</form>
+		</div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script>
+		var app = angular.module('demo',[]);
+		app.controller('indexCtrl',function($scope){
+			$scope.name = '表单验证';
+		})
+	</script>
+</html>
