@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -16,18 +17,18 @@
 		app.controller('indexCtrl', function($scope) {
 
 			//fromJson
-			$scope.name = "ws";
+			$scope.name = "wscats";
 			console.log(angular)
-			var data = angular.fromJson('{"name":"xie"}');
+			var data = angular.fromJson('{"name":"a"}');
 			console.log(data)
 
 			//toJson
 			var data2 = angular.toJson({
-				name: 'lan'
+				name: 'b'
 			});
 			console.log(data2)
 			var obj = {
-				name: 'yi',
+				name: 'c',
 				age: 18
 			}
 
@@ -44,18 +45,18 @@
 
 			//merge (合并对象)
 			var obj4 = angular.merge(obj, {
-				as: 'asda',
-				asdasd: 'asdsa'
+				as: 'd',
+				asdasd: 'e'
 			});
 			console.log(obj4)
 
 			//equals (判断对象是否一样)
 			var obj5 = {
-				name: 'yi',
+				name: 'f',
 				age: 17
 			}
 			var obj6 = {
-				name: 'yi',
+				name: 'g',
 				age: 18
 			}
 			console.log(angular.equals(obj5, obj6))
@@ -67,14 +68,14 @@
 
 			//forEach
 			var arr = [{
-				name: 'yao'
+				name: 'h'
 			}, {
-				name: 'yi'
+				name: 'i'
 			}, {
-				name: 'ye'
+				name: 'j'
 			}]
 			var obj7 = {
-				name: 'yao',
+				name: 'k',
 				skill: 'ps',
 				age: '00'
 			}
@@ -86,10 +87,10 @@
 				console.log(key + '=>' + value)
 			})
 			console.log(arr)
-			
+
 			//isString
 			console.log(angular.isString(123))
-			
+
 			//lowercase
 			console.log(angular.lowercase("AbCdEf"))
 		})

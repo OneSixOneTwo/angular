@@ -1,0 +1,1 @@
+var app = angular.module("newApp", ["ui.router","routers","controllers","directives","services","filters"]);
