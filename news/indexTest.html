@@ -5,13 +5,16 @@
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<link rel="stylesheet" href="css/weui.css" />
+	<link rel="stylesheet" href="css/swiper.css" />
+	<link rel="stylesheet" href="css/base.css" />
 	<body>
-		<div ng-controller="indexCtrl">
-			<p>{{name}}</p>
-		</div>
+		<ui-view></ui-view>
 	</body>
 	<script src="js/angular.js"></script>
 	<script src="js/angular-ui-router.js"></script>
+	<script src="js/swiper.js"></script>
 	<script src="js/base/base.js"></script>
 	<script src="js/router/router.js"></script>
 	<script src="js/controller/controller.js"></script>
