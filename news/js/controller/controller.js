@@ -18,7 +18,7 @@
 		$scope.news = [];
 		$scope.loadMore = function() {
 			$http({
-				url: "http://10.3.132.40:81/news/php/index.php/news_api/show_detail_by_channel_id",
+				url: "js/news.json",
 				method: "GET",
 				params: {
 					channel_id: 6,
@@ -30,13 +30,14 @@
 		}
 		$scope.loadMore();
 	})
-	controllers.controller("detailCtrl", function($scope,$location,$http) {
+	controllers.controller("detailCtrl", function($scope,$location,$http,$state) {
 		console.log($location.search());
+		console.log($state.params)
 		$http({
-			url:"http://10.3.132.40:81/news/php/index.php/news_api/show_detail",
+			url:"js/detail.json",
 			method: "GET",
 			params:{
-				id:$location.search().id
+				id:$state.params.id
 			}
 		}).then(function(data){
 			console.log(data)

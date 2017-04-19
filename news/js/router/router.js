@@ -33,7 +33,7 @@
 			})
 			//新闻详情页
 			.state("detail", {
-				url: "/detail",
+				url: "/detail/:id",
 				templateUrl: "template/detail.html",
 				controller: "detailCtrl"
 			});
