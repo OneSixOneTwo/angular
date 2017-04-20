@@ -1,6 +1,31 @@
 <!--推荐页面-->
 <wheader></wheader>
 <div class="has_header">
+	<div class="weui-search-bar" ng-class="{'weui-search-bar_focusing':isShowSearchBar}" id="search_bar">
+		<form class="weui-search-bar__form">
+			<div class="weui-search-bar__box">
+				<i class="weui-icon-search"></i>
+				<input type="search" ng-model="searchName" ng-focus="showSearchBar()" class="weui-search-bar__input" id="search_input" placeholder="搜索" />
+				<a href="javascript:" ng-click="searchClear()" class="weui-icon-clear" id="search_clear"></a>
+			</div>
+			<label for="search_input" class="weui-search-bar__label" id="search_text">
+            <i class="weui-icon-search"></i>
+            <span>搜索</span>
+        </label>
+		</form>
+		<a href="javascript:" ng-click="isShowSearchBar=false" class="weui-search-bar__cancel-btn" id="search_cancel">取消</a>
+	</div>
 	<wswiper></wswiper>
 	<wlist></wlist>
+</div>
+<wloading></wloading>
+<div ng-show="isShowdialog">
+	<div class="weui-mask"></div>
+	<div class="weui-dialog">
+		<div class="weui-dialog__hd"><strong class="weui-dialog__title">弹窗标题</strong></div>
+		<div class="weui-dialog__bd">弹窗内容，告知当前页面信息等</div>
+		<div class="weui-dialog__ft">
+			<a ng-click="isShowdialog=false" href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+		</div>
+	</div>
 </div>

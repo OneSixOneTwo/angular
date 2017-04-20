@@ -1,7 +1,7 @@
 <div class="weui-panel weui-panel_access" style="margin-top: 0px; margin-bottom: 53px;">
 	<div class="weui-panel__hd">图文组合列表</div>
 	<div class="weui-panel__bd">
-		<a ng-repeat="n in news|filter:searchName" ng-href="#/detail/{{n.id}}" class="weui-media-box weui-media-box_appmsg">
+		<a ng-repeat="n in news" ng-href="#/detail/{{n.id}}" class="weui-media-box weui-media-box_appmsg">
 			<div ng-show="n.image" class="weui-media-box__hd">
 				<img class="weui-media-box__thumb" ng-src="{{n.image}}" alt="">
 			</div>
@@ -11,14 +11,10 @@
 			</div>
 		</a>
 	</div>
-	<div class="weui-panel__ft" ng-hide="isLoading">
+	<div class="weui-panel__ft">
 		<a href="javascript:void(0);" ng-click="loadMore()" class="weui-cell weui-cell_access weui-cell_link">
 			<div class="weui-cell__bd">查看更多</div>
 			<span class="weui-cell__ft"></span>
 		</a>
-	</div>
-	<div class="weui-loadmore" ng-show="isLoading">
-		<i class="weui-loading"></i>
-		<span class="weui-loadmore__tips">正在加载</span>
 	</div>
 </div>
